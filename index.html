@@ -22,16 +22,19 @@
     }
 
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
       background: linear-gradient(180deg, #0b1020 0%, #111827 100%);
     }
+
     .wrap {
       width: min(1650px, calc(100% - 24px));
       margin: 16px auto 36px;
     }
+
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -40,27 +43,32 @@
       flex-wrap: wrap;
       margin-bottom: 16px;
     }
+
     h1 {
       margin: 0 0 6px;
       font-size: 28px;
       color: #fff;
     }
+
     .subtitle {
       color: var(--muted);
       font-size: 13px;
       line-height: 1.45;
       max-width: 980px;
     }
+
     .panel, .meta-box, .card {
       background: rgba(17, 24, 39, 0.94);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
+
     .meta-box {
       min-width: 360px;
       padding: 12px 14px;
     }
+
     .meta-row {
       display: grid;
       grid-template-columns: 170px 1fr;
@@ -68,9 +76,11 @@
       font-size: 12px;
       margin-bottom: 6px;
     }
+
     .meta-row:last-child { margin-bottom: 0; }
     .meta-label { color: var(--muted); }
     .meta-value { color: #fff; font-weight: 700; }
+
     .filters {
       display: grid;
       grid-template-columns: repeat(6, minmax(120px, 1fr));
@@ -82,13 +92,16 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
+
     .field { display: flex; flex-direction: column; gap: 6px; }
+
     .field label {
       font-size: 11px;
       text-transform: uppercase;
       color: var(--muted);
       letter-spacing: 0.35px;
     }
+
     .field select, .field button {
       height: 38px;
       border-radius: 10px;
@@ -98,29 +111,38 @@
       padding: 0 10px;
       font-size: 13px;
     }
-    .field button { cursor: pointer; font-weight: 700; }
+
+    .field button {
+      cursor: pointer;
+      font-weight: 700;
+    }
+
     .cards {
       display: grid;
       grid-template-columns: repeat(6, minmax(180px, 1fr));
       gap: 12px;
       margin-bottom: 16px;
     }
+
     .card {
       padding: 14px;
       min-height: 108px;
       border-top: 3px solid transparent;
     }
+
     .top-good { border-top-color: var(--good); }
     .top-warn { border-top-color: var(--warn); }
     .top-bad { border-top-color: var(--bad); }
     .top-info { border-top-color: var(--info); }
     .top-accent { border-top-color: var(--accent); }
+
     .kpi-title {
       font-size: 11px;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 10px;
     }
+
     .kpi-value {
       font-size: 28px;
       font-weight: 800;
@@ -128,39 +150,48 @@
       line-height: 1;
       margin-bottom: 8px;
     }
+
     .kpi-sub {
       font-size: 12px;
       color: var(--muted);
       line-height: 1.4;
     }
+
     .grid {
       display: grid;
       grid-template-columns: 2.25fr 1fr;
       gap: 16px;
       margin-bottom: 16px;
     }
+
     .panel-header {
       padding: 14px 16px;
       border-bottom: 1px solid var(--line);
       background: rgba(2, 6, 23, 0.35);
     }
+
     .panel-title {
       font-size: 15px;
       font-weight: 800;
       color: #fff;
       margin-bottom: 4px;
     }
+
     .panel-subtitle {
       font-size: 12px;
       color: var(--muted);
     }
+
     .panel-body { padding: 14px 16px 16px; }
+
     .table-wrap { overflow: auto; }
+
     table {
       width: 100%;
       border-collapse: collapse;
       min-width: 1380px;
     }
+
     th, td {
       padding: 10px 8px;
       font-size: 12px;
@@ -168,6 +199,7 @@
       white-space: nowrap;
       border-bottom: 1px solid rgba(148, 163, 184, 0.12);
     }
+
     th {
       position: sticky;
       top: 0;
@@ -178,8 +210,11 @@
       text-transform: uppercase;
       letter-spacing: 0.35px;
     }
+
     th:first-child, td:first-child { text-align: left; }
+
     tr:hover td { background: rgba(250, 204, 21, 0.05); }
+
     .badge {
       display: inline-flex;
       align-items: center;
@@ -188,29 +223,36 @@
       font-size: 11px;
       font-weight: 700;
     }
+
     .badge.good { background: rgba(34, 197, 94, 0.14); color: #86efac; }
     .badge.warn { background: rgba(245, 158, 11, 0.14); color: #fcd34d; }
     .badge.bad { background: rgba(239, 68, 68, 0.14); color: #fca5a5; }
     .badge.info { background: rgba(56, 189, 248, 0.14); color: #7dd3fc; }
+
     .text-good { color: #86efac; }
     .text-warn { color: #fcd34d; }
     .text-bad { color: #fca5a5; }
     .text-info { color: #7dd3fc; }
+
     .ranking-list, .mini-grid { display: grid; gap: 10px; }
+
     .rank-item, .mini-box {
       background: var(--panel-2);
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 12px;
     }
+
     .rank-top {
       display: flex;
       justify-content: space-between;
       gap: 10px;
       margin-bottom: 8px;
     }
+
     .rank-name { font-weight: 800; color: #fff; }
     .rank-score { font-weight: 800; color: var(--accent); }
+
     .progress {
       height: 8px;
       background: #1e293b;
@@ -218,10 +260,12 @@
       overflow: hidden;
       margin-bottom: 8px;
     }
+
     .progress-bar { height: 100%; border-radius: 999px; }
     .progress-good { background: var(--good); }
     .progress-warn { background: var(--warn); }
     .progress-bad { background: var(--bad); }
+
     .rank-meta {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -229,35 +273,54 @@
       font-size: 11px;
       color: var(--muted);
     }
+
     .mini-grid { grid-template-columns: repeat(2, 1fr); }
+
     .mini-title {
       font-size: 11px;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 8px;
     }
+
     .mini-value {
       font-size: 22px;
       font-weight: 800;
       color: #fff;
       margin-bottom: 6px;
     }
+
     .mini-sub {
       font-size: 12px;
       color: var(--muted);
       line-height: 1.35;
     }
+
     .footer-note {
       margin-top: 12px;
       font-size: 11px;
       color: var(--muted);
       line-height: 1.5;
     }
+
+    .error-box {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      background: rgba(127, 29, 29, 0.25);
+      color: #fecaca;
+      font-size: 12px;
+      line-height: 1.5;
+      display: none;
+    }
+
     @media (max-width: 1200px) {
       .filters { grid-template-columns: repeat(3, 1fr); }
       .cards { grid-template-columns: repeat(3, 1fr); }
       .grid { grid-template-columns: 1fr; }
     }
+
     @media (max-width: 760px) {
       .wrap { width: min(100% - 12px, 100%); }
       h1 { font-size: 22px; }
@@ -375,6 +438,7 @@
             Score sugerido: 45% SLA + 25% folga de capacidade + 15% risco + 15% equilíbrio de participação.<br>
             WM = parceiro em teste. SM = limitação física. Uma carreta = 90 m³.
           </div>
+          <div id="errorBox" class="error-box"></div>
         </div>
       </div>
     </div>
@@ -399,16 +463,11 @@
   </div>
 
   <script>
-    // =========================================================
-    // CONFIGURAÇÃO
-    // =========================================================
     const M3_POR_CARRETA = 90;
 
-    // COLE AQUI AS URLS RAW DO GITHUB
-    const CSV_CARGAS_URL = 'COLE_AQUI_A_URL_RAW_DO_ARQUIVO_CARGAS';
-    const CSV_PERFORMANCE_URL = 'COLE_AQUI_A_URL_RAW_DO_ARQUIVO_PERFORMANCE';
+    const CSV_CARGAS_URL = 'https://raw.githubusercontent.com/Danielprogram128/oplogsp/main/cargas_diarias.csv';
+    const CSV_PERFORMANCE_URL = 'https://raw.githubusercontent.com/Danielprogram128/oplogsp/main/performance_operadores.csv';
 
-    // Perfis fixos / contexto operacional
     const PERFIS_FIXOS = {
       'WM': 'TESTE',
       'SM': 'RESTRICAO_ESPACO',
@@ -418,15 +477,23 @@
 
     const fmtInt = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
     const fmt2 = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    const fmt4 = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
 
     let cargasBase = [];
     let performanceBase = [];
     let agregados = [];
 
-    // =========================================================
-    // UTILITÁRIOS
-    // =========================================================
+    function showError(message) {
+      const box = document.getElementById('errorBox');
+      box.style.display = 'block';
+      box.innerHTML = message;
+    }
+
+    function hideError() {
+      const box = document.getElementById('errorBox');
+      box.style.display = 'none';
+      box.innerHTML = '';
+    }
+
     function normalizeText(value) {
       return String(value || '').replace(/\s+/g, ' ').trim().toUpperCase();
     }
@@ -466,7 +533,8 @@
     }
 
     function parseCSVFlexible(text) {
-      const lines = text.trim().split(/\r?\n/).filter(Boolean);
+      const cleanText = String(text || '').replace(/^\uFEFF/, '').trim();
+      const lines = cleanText.split(/\r?\n/).filter(Boolean);
       if (!lines.length) return [];
 
       const delimiter = detectDelimiter(lines[0]);
@@ -485,6 +553,11 @@
     function parseNumberBr(value) {
       if (value == null || value === '') return 0;
       const raw = String(value).trim();
+
+      if (/^-?\d+(\.\d+)?$/.test(raw)) {
+        return Number(raw);
+      }
+
       const normalized = raw.replace(/\./g, '').replace(',', '.');
       const parsed = Number(normalized);
       return Number.isFinite(parsed) ? parsed : 0;
@@ -549,87 +622,70 @@
       return 'REDUZIR';
     }
 
-    // =========================================================
-    // MOCKS (para visualizar enquanto não cola as URLs)
-    // =========================================================
-    function loadMockData() {
-      cargasBase = [
-        { data:'06/01/2026', mes:'JAN', transportadora:'VEP', m3:40.1624, kg:9206.878 },
-        { data:'07/01/2026', mes:'JAN', transportadora:'VEP', m3:32.6191, kg:6664.212 },
-        { data:'12/01/2026', mes:'JAN', transportadora:'SM', m3:85.1107, kg:17785.828 },
-        { data:'16/01/2026', mes:'JAN', transportadora:'TR CARGO', m3:56.3267, kg:12218.604 },
-        { data:'20/01/2026', mes:'JAN', transportadora:'VEP', m3:91.3582, kg:19474.488 },
-        { data:'03/02/2026', mes:'FEV', transportadora:'SM', m3:66.8568, kg:15408.348 },
-        { data:'05/02/2026', mes:'FEV', transportadora:'TR CARGO', m3:43.7068, kg:10312.56 },
-        { data:'24/02/2026', mes:'FEV', transportadora:'TR CARGO', m3:103.4091, kg:20710.718 },
-        { data:'09/03/2026', mes:'MAR', transportadora:'CPP', m3:75.4961, kg:14958.836 },
-        { data:'18/03/2026', mes:'MAR', transportadora:'WM', m3:63.5293, kg:14155.852 },
-        { data:'26/03/2026', mes:'MAR', transportadora:'FTB', m3:88.5904, kg:17401.116 },
-        { data:'01/04/2026', mes:'ABR', transportadora:'CPP', m3:90.5330, kg:20659 },
-        { data:'01/04/2026', mes:'ABR', transportadora:'FTB', m3:91.2029, kg:23861.224 },
-        { data:'01/04/2026', mes:'ABR', transportadora:'TR CARGO', m3:86.7284, kg:20613.456 },
-        { data:'01/04/2026', mes:'ABR', transportadora:'VEP', m3:87.2528, kg:20452.004 },
-        { data:'01/04/2026', mes:'ABR', transportadora:'WM', m3:11.8303, kg:2837.12 }
-      ].map(r => ({ ...r, dataObj: parseDateBr(r.data) }));
-
-      performanceBase = [
-        { transportadora:'WM', atrasadas:4, emDia:2, capacidadeSemanal:2 },
-        { transportadora:'VEP', atrasadas:15, emDia:44, capacidadeSemanal:3 },
-        { transportadora:'TR CARGO', atrasadas:5, emDia:55, capacidadeSemanal:5 },
-        { transportadora:'SM', atrasadas:1, emDia:0, capacidadeSemanal:2 },
-        { transportadora:'FTB', atrasadas:20, emDia:18, capacidadeSemanal:2 },
-        { transportadora:'CPP', atrasadas:54, emDia:117, capacidadeSemanal:5 }
-      ];
-    }
-
-    // =========================================================
-    // LEITURA DOS 2 CSVs
-    // =========================================================
     async function loadData() {
-      const usingMock = CSV_CARGAS_URL.includes('COLE_AQUI') || CSV_PERFORMANCE_URL.includes('COLE_AQUI');
+      hideError();
 
-      if (usingMock) {
-        loadMockData();
+      try {
+        const [cargasResponse, performanceResponse] = await Promise.all([
+          fetch(CSV_CARGAS_URL + '?t=' + Date.now()),
+          fetch(CSV_PERFORMANCE_URL + '?t=' + Date.now())
+        ]);
+
+        if (!cargasResponse.ok) {
+          throw new Error('Não consegui ler o arquivo cargas_diarias.csv');
+        }
+
+        if (!performanceResponse.ok) {
+          throw new Error('Não consegui ler o arquivo performance_operadores.csv');
+        }
+
+        const [cargasText, performanceText] = await Promise.all([
+          cargasResponse.text(),
+          performanceResponse.text()
+        ]);
+
+        const cargasRows = parseCSVFlexible(cargasText);
+        const performanceRows = parseCSVFlexible(performanceText);
+
+        cargasBase = cargasRows.map(row => ({
+          data: row['DATA'] || row['Data'] || row['data'] || '',
+          mes: normalizeText(row['MÊS'] || row['MES'] || row['mês'] || row['mes'] || ''),
+          transportadora: normalizeText(row['TRANSPORTADORA'] || row['Transportadora'] || row['transportadora'] || ''),
+          m3: parseNumberBr(row['M³'] || row['M3'] || row['m³'] || row['m3'] || 0),
+          kg: parseNumberBr(row['Kg'] || row['KG'] || row['kg'] || 0)
+        })).map(r => ({ ...r, dataObj: parseDateBr(r.data) }));
+
+        performanceBase = performanceRows.map(row => ({
+          transportadora: normalizeText(row['TRANSPORTADORA'] || row['Transportadora'] || row['transportadora'] || ''),
+          atrasadas: parseNumberBr(row['ATRASADOS (ENTREGAS)'] || row['ATRASADOS'] || row['Atrasados'] || row['atrasados'] || 0),
+          emDia: parseNumberBr(row['EM DIA (ENTREGAS)'] || row['EM DIA'] || row['Em dia'] || row['em dia'] || 0),
+          capacidadeSemanal: parseNumberBr(row['CAPACIDADE / carretas semanais'] || row['CAPACIDADE'] || row['Capacidade'] || row['capacidade'] || 0)
+        }));
+
+        if (!cargasBase.length) {
+          throw new Error('O arquivo cargas_diarias.csv veio vazio ou fora do formato esperado.');
+        }
+
+        if (!performanceBase.length) {
+          throw new Error('O arquivo performance_operadores.csv veio vazio ou fora do formato esperado.');
+        }
+
         initFilters();
         refreshDashboard();
-        return;
+      } catch (error) {
+        console.error(error);
+        showError(
+          `<strong>Erro ao carregar os dados.</strong><br>` +
+          `${error.message}<br><br>` +
+          `Confira estes pontos:<br>` +
+          `1. Os dois CSVs precisam estar públicos no GitHub.<br>` +
+          `2. O separador ideal é <strong>;</strong>.<br>` +
+          `3. O CSV de cargas deve ter: <strong>DATA;MÊS;TRANSPORTADORA;M³;Kg</strong>.<br>` +
+          `4. O CSV de performance deve ter: <strong>TRANSPORTADORA;ATRASADOS (ENTREGAS);EM DIA (ENTREGAS);CAPACIDADE / carretas semanais</strong>.`
+        );
       }
-
-      const [cargasResponse, performanceResponse] = await Promise.all([
-        fetch(CSV_CARGAS_URL + '?t=' + Date.now()),
-        fetch(CSV_PERFORMANCE_URL + '?t=' + Date.now())
-      ]);
-
-      const [cargasText, performanceText] = await Promise.all([
-        cargasResponse.text(),
-        performanceResponse.text()
-      ]);
-
-      const cargasRows = parseCSVFlexible(cargasText);
-      const performanceRows = parseCSVFlexible(performanceText);
-
-      cargasBase = cargasRows.map(row => ({
-        data: row['DATA'] || row['Data'] || row['data'] || '',
-        mes: normalizeText(row['MÊS'] || row['MES'] || row['mês'] || row['mes'] || ''),
-        transportadora: normalizeText(row['TRANSPORTADORA'] || row['Transportadora'] || row['transportadora'] || ''),
-        m3: parseNumberBr(row['M³'] || row['M3'] || row['m³'] || row['m3'] || 0),
-        kg: parseNumberBr(row['Kg'] || row['KG'] || row['kg'] || 0)
-      })).map(r => ({ ...r, dataObj: parseDateBr(r.data) }));
-
-      performanceBase = performanceRows.map(row => ({
-        transportadora: normalizeText(row['TRANSPORTADORA'] || row['Transportadora'] || row['transportadora'] || ''),
-        atrasadas: parseNumberBr(row['ATRASADOS (ENTREGAS)'] || row['ATRASADOS'] || row['Atrasados'] || row['atrasados'] || 0),
-        emDia: parseNumberBr(row['EM DIA (ENTREGAS)'] || row['EM DIA'] || row['Em dia'] || row['em dia'] || 0),
-        capacidadeSemanal: parseNumberBr(row['CAPACIDADE / carretas semanais'] || row['CAPACIDADE'] || row['Capacidade'] || row['capacidade'] || 0)
-      }));
-
-      initFilters();
-      refreshDashboard();
     }
 
-    // =========================================================
-    // FILTROS
-    // =========================================================
     function initFilters() {
       const meses = ['TODOS', ...Array.from(new Set(cargasBase.map(r => r.mes).filter(Boolean))).sort()];
       const operadores = ['TODOS', ...Array.from(new Set(cargasBase.map(r => r.transportadora).filter(Boolean))).sort()];
@@ -642,9 +698,6 @@
       document.getElementById(id).innerHTML = values.map(v => `<option value="${v}">${v}</option>`).join('');
     }
 
-    // =========================================================
-    // AGREGAÇÃO E CRUZAMENTO DAS BASES
-    // =========================================================
     function aggregateData() {
       const mes = document.getElementById('mesFilter').value || 'TODOS';
       const operador = document.getElementById('operadorFilter').value || 'TODOS';
@@ -674,7 +727,6 @@
         item.kg += row.kg;
       });
 
-      // garante operadores da base de performance também, mesmo se não tiverem volume no filtro
       performanceBase.forEach(row => {
         if ((operador === 'TODOS' || row.transportadora === operador) && !byOperator.has(row.transportadora)) {
           byOperator.set(row.transportadora, {
@@ -747,9 +799,6 @@
       return { filteredCargas, weeks };
     }
 
-    // =========================================================
-    // RENDER
-    // =========================================================
     function renderMeta(filteredCargas, weeks) {
       const dates = filteredCargas.map(r => r.dataObj).filter(Boolean).sort((a, b) => a - b);
       const periodText = dates.length
@@ -943,6 +992,7 @@
     });
 
     document.getElementById('reloadBtn').addEventListener('click', loadData);
+
     loadData();
   </script>
 </body>
