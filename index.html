@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel de Capacidade dos Operadores</title>
+  <title>Capacidade dos Operadores Logísticos</title>
   <style>
     :root {
       --bg: #0b1020;
@@ -498,6 +498,19 @@
       return String(value || '').replace(/\s+/g, ' ').trim().toUpperCase();
     }
 
+    function normalizeHeader(value) {
+      return String(value || '')
+        .replace(/^\uFEFF/, '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/³/g, '3')
+        .replace(/º/g, '')
+        .replace(/ª/g, '')
+        .replace(/[^\w]/g, '')
+        .toUpperCase()
+        .trim();
+    }
+
     function splitFlexible(line, delimiter) {
       const result = [];
       let current = '';
@@ -538,7 +551,8 @@
       if (!lines.length) return [];
 
       const delimiter = detectDelimiter(lines[0]);
-      const headers = splitFlexible(lines[0], delimiter).map(h => h.trim());
+      const rawHeaders = splitFlexible(lines[0], delimiter).map(h => h.trim());
+      const headers = rawHeaders.map(normalizeHeader);
 
       return lines.slice(1).map(line => {
         const values = splitFlexible(line, delimiter);
@@ -631,13 +645,8 @@
           fetch(CSV_PERFORMANCE_URL + '?t=' + Date.now())
         ]);
 
-        if (!cargasResponse.ok) {
-          throw new Error('Não consegui ler o arquivo cargas_diarias.csv');
-        }
-
-        if (!performanceResponse.ok) {
-          throw new Error('Não consegui ler o arquivo performance_operadores.csv');
-        }
+        if (!cargasResponse.ok) throw new Error('Não consegui ler o arquivo cargas_diarias.csv');
+        if (!performanceResponse.ok) throw new Error('Não consegui ler o arquivo performance_operadores.csv');
 
         const [cargasText, performanceText] = await Promise.all([
           cargasResponse.text(),
@@ -648,19 +657,22 @@
         const performanceRows = parseCSVFlexible(performanceText);
 
         cargasBase = cargasRows.map(row => ({
-          data: row['DATA'] || row['Data'] || row['data'] || '',
-          mes: normalizeText(row['MÊS'] || row['MES'] || row['mês'] || row['mes'] || ''),
-          transportadora: normalizeText(row['TRANSPORTADORA'] || row['Transportadora'] || row['transportadora'] || ''),
-          m3: parseNumberBr(row['M³'] || row['M3'] || row['m³'] || row['m3'] || 0),
-          kg: parseNumberBr(row['Kg'] || row['KG'] || row['kg'] || 0)
-        })).map(r => ({ ...r, dataObj: parseDateBr(r.data) }));
+          data: row['DATA'] || '',
+          mes: normalizeText(row['MES'] || ''),
+          transportadora: normalizeText(row['TRANSPORTADORA'] || ''),
+          m3: parseNumberBr(row['M3'] || 0),
+          kg: parseNumberBr(row['KG'] || 0)
+        }))
+        .filter(r => r.transportadora)
+        .map(r => ({ ...r, dataObj: parseDateBr(r.data) }));
 
         performanceBase = performanceRows.map(row => ({
-          transportadora: normalizeText(row['TRANSPORTADORA'] || row['Transportadora'] || row['transportadora'] || ''),
-          atrasadas: parseNumberBr(row['ATRASADOS (ENTREGAS)'] || row['ATRASADOS'] || row['Atrasados'] || row['atrasados'] || 0),
-          emDia: parseNumberBr(row['EM DIA (ENTREGAS)'] || row['EM DIA'] || row['Em dia'] || row['em dia'] || 0),
-          capacidadeSemanal: parseNumberBr(row['CAPACIDADE / carretas semanais'] || row['CAPACIDADE'] || row['Capacidade'] || row['capacidade'] || 0)
-        }));
+          transportadora: normalizeText(row['TRANSPORTADORA'] || ''),
+          atrasadas: parseNumberBr(row['ATRASADOSENTREGAS'] || 0),
+          emDia: parseNumberBr(row['EMDIAENTREGAS'] || 0),
+          capacidadeSemanal: parseNumberBr(row['CAPACIDADECARRETASSEMANAIS'] || 0)
+        }))
+        .filter(r => r.transportadora);
 
         if (!cargasBase.length) {
           throw new Error('O arquivo cargas_diarias.csv veio vazio ou fora do formato esperado.');
@@ -688,7 +700,10 @@
 
     function initFilters() {
       const meses = ['TODOS', ...Array.from(new Set(cargasBase.map(r => r.mes).filter(Boolean))).sort()];
-      const operadores = ['TODOS', ...Array.from(new Set(cargasBase.map(r => r.transportadora).filter(Boolean))).sort()];
+      const operadores = ['TODOS', ...Array.from(new Set([
+        ...cargasBase.map(r => r.transportadora).filter(Boolean),
+        ...performanceBase.map(r => r.transportadora).filter(Boolean)
+      ])).sort()];
 
       setSelectOptions('mesFilter', meses);
       setSelectOptions('operadorFilter', operadores);
@@ -715,6 +730,7 @@
       const perfMap = new Map(performanceBase.map(r => [r.transportadora, r]));
 
       filteredCargas.forEach(row => {
+        if (!row.transportadora) return;
         if (!byOperator.has(row.transportadora)) {
           byOperator.set(row.transportadora, {
             transportadora: row.transportadora,
@@ -728,6 +744,7 @@
       });
 
       performanceBase.forEach(row => {
+        if (!row.transportadora) return;
         if ((operador === 'TODOS' || row.transportadora === operador) && !byOperator.has(row.transportadora)) {
           byOperator.set(row.transportadora, {
             transportadora: row.transportadora,
