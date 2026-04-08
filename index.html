@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de Capacidade dos Operadores</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #111827;
+      --panel-2: #0f172a;
+      --line: #334155;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --good: #22c55e;
+      --warn: #f59e0b;
+      --bad: #ef4444;
+      --info: #38bdf8;
+      --accent: #facc15;
+      --radius: 16px;
+      --shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #0b1020 0%, #111827 100%);
+    }
+    .wrap {
+      width: min(1650px, calc(100% - 24px));
+      margin: 16px auto 36px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    h1 {
+      margin: 0 0 6px;
+      font-size: 28px;
+      color: #fff;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      max-width: 980px;
+    }
+    .panel, .meta-box, .card {
+      background: rgba(17, 24, 39, 0.94);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .meta-box {
+      min-width: 360px;
+      padding: 12px 14px;
+    }
+    .meta-row {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 8px;
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+    .meta-row:last-child { margin-bottom: 0; }
+    .meta-label { color: var(--muted); }
+    .meta-value { color: #fff; font-weight: 700; }
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(120px, 1fr));
+      gap: 12px;
+      padding: 14px;
+      margin-bottom: 16px;
+      background: rgba(17, 24, 39, 0.9);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--muted);
+      letter-spacing: 0.35px;
+    }
+    .field select, .field button {
+      height: 38px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      color: var(--text);
+      padding: 0 10px;
+      font-size: 13px;
+    }
+    .field button { cursor: pointer; font-weight: 700; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .card {
+      padding: 14px;
+      min-height: 108px;
+      border-top: 3px solid transparent;
+    }
+    .top-good { border-top-color: var(--good); }
+    .top-warn { border-top-color: var(--warn); }
+    .top-bad { border-top-color: var(--bad); }
+    .top-info { border-top-color: var(--info); }
+    .top-accent { border-top-color: var(--accent); }
+    .kpi-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .kpi-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .kpi-sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 2.25fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .panel-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(2, 6, 23, 0.35);
+    }
+    .panel-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .panel-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .panel-body { padding: 14px 16px 16px; }
+    .table-wrap { overflow: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1380px;
+    }
+    th, td {
+      padding: 10px 8px;
+      font-size: 12px;
+      text-align: right;
+      white-space: nowrap;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    }
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: #111827;
+      color: #cbd5e1;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.35px;
+    }
+    th:first-child, td:first-child { text-align: left; }
+    tr:hover td { background: rgba(250, 204, 21, 0.05); }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .badge.good { background: rgba(34, 197, 94, 0.14); color: #86efac; }
+    .badge.warn { background: rgba(245, 158, 11, 0.14); color: #fcd34d; }
+    .badge.bad { background: rgba(239, 68, 68, 0.14); color: #fca5a5; }
+    .badge.info { background: rgba(56, 189, 248, 0.14); color: #7dd3fc; }
+    .text-good { color: #86efac; }
+    .text-warn { color: #fcd34d; }
+    .text-bad { color: #fca5a5; }
+    .text-info { color: #7dd3fc; }
+    .ranking-list, .mini-grid { display: grid; gap: 10px; }
+    .rank-item, .mini-box {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .rank-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .rank-name { font-weight: 800; color: #fff; }
+    .rank-score { font-weight: 800; color: var(--accent); }
+    .progress {
+      height: 8px;
+      background: #1e293b;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .progress-bar { height: 100%; border-radius: 999px; }
+    .progress-good { background: var(--good); }
+    .progress-warn { background: var(--warn); }
+    .progress-bad { background: var(--bad); }
+    .rank-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .mini-grid { grid-template-columns: repeat(2, 1fr); }
+    .mini-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .mini-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .mini-sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+    .footer-note {
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    @media (max-width: 1200px) {
+      .filters { grid-template-columns: repeat(3, 1fr); }
+      .cards { grid-template-columns: repeat(3, 1fr); }
+      .grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 12px, 100%); }
+      h1 { font-size: 22px; }
+      .filters { grid-template-columns: repeat(2, 1fr); }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .mini-grid, .rank-meta { grid-template-columns: 1fr; }
+      .kpi-value { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <h1>Capacidade dos Operadores Logísticos</h1>
+        <div class="subtitle">
+          Painel analítico cruzando 2 bases: cargas diárias e performance/capacidade. Uma carreta equivale a 90 m³. O painel calcula carretas equivalentes, média semanal, ocupação, SLA, risco e score por operador.
+        </div>
+      </div>
+      <div class="meta-box">
+        <div class="meta-row"><div class="meta-label">Fonte 1</div><div class="meta-value">cargas_diarias.csv</div></div>
+        <div class="meta-row"><div class="meta-label">Fonte 2</div><div class="meta-value">performance_operadores.csv</div></div>
+        <div class="meta-row"><div class="meta-label">Última atualização</div><div class="meta-value" id="metaUpdated">Carregando...</div></div>
+        <div class="meta-row"><div class="meta-label">Período analisado</div><div class="meta-value" id="metaPeriod">Carregando...</div></div>
+        <div class="meta-row"><div class="meta-label">Operadores cruzados</div><div class="meta-value" id="metaOperators">0</div></div>
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="field">
+        <label for="mesFilter">Mês</label>
+        <select id="mesFilter"></select>
+      </div>
+      <div class="field">
+        <label for="operadorFilter">Transportadora</label>
+        <select id="operadorFilter"></select>
+      </div>
+      <div class="field">
+        <label for="statusFilter">Classificação</label>
+        <select id="statusFilter">
+          <option value="TODOS">Todas</option>
+          <option value="PRIORIZAR">Priorizar</option>
+          <option value="MONITORAR">Monitorar</option>
+          <option value="REDUZIR">Reduzir</option>
+          <option value="TESTE">Teste</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="sortFilter">Ordenar por</label>
+        <select id="sortFilter">
+          <option value="score">Score</option>
+          <option value="sla">SLA</option>
+          <option value="risco">Risco</option>
+          <option value="ocupacao">Ocupação</option>
+          <option value="carretasEq">Carretas equivalentes</option>
+          <option value="m3">m³</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="directionFilter">Sentido</label>
+        <select id="directionFilter">
+          <option value="desc">Maior para menor</option>
+          <option value="asc">Menor para maior</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>&nbsp;</label>
+        <button id="reloadBtn">Recarregar base</button>
+      </div>
+    </div>
+
+    <div class="cards" id="cards"></div>
+
+    <div class="grid">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Matriz Analítica por Operador</div>
+          <div class="panel-subtitle">Volume, peso, carretas equivalentes, média semanal, capacidade, SLA, risco e score consolidado</div>
+        </div>
+        <div class="panel-body table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Transportadora</th>
+                <th>Perfil</th>
+                <th>m³ total</th>
+                <th>Kg total</th>
+                <th>Kg/m³</th>
+                <th>Carretas equivalentes</th>
+                <th>Média/semana</th>
+                <th>Cap. semanal</th>
+                <th>Ocupação %</th>
+                <th>Em dia</th>
+                <th>Atrasadas</th>
+                <th>SLA %</th>
+                <th>Part. volume %</th>
+                <th>Risco</th>
+                <th>Score</th>
+                <th>Classificação</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Ranking e Decisão</div>
+          <div class="panel-subtitle">Leitura prática para distribuição de volume</div>
+        </div>
+        <div class="panel-body">
+          <div class="ranking-list" id="rankingList"></div>
+          <div class="footer-note">
+            Score sugerido: 45% SLA + 25% folga de capacidade + 15% risco + 15% equilíbrio de participação.<br>
+            WM = parceiro em teste. SM = limitação física. Uma carreta = 90 m³.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Radar Operacional</div>
+          <div class="panel-subtitle">Melhor score, maior risco, maior ocupação e principal observação</div>
+        </div>
+        <div class="panel-body mini-grid" id="radarGrid"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Leitura Executiva</div>
+          <div class="panel-subtitle">Diagnóstico automático com base nas regras do painel</div>
+        </div>
+        <div class="panel-body" id="insightsBox"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================
+    // CONFIGURAÇÃO
+    // =========================================================
+    const M3_POR_CARRETA = 90;
+
+    // COLE AQUI AS URLS RAW DO GITHUB
+    const CSV_CARGAS_URL = 'COLE_AQUI_A_URL_RAW_DO_ARQUIVO_CARGAS';
+    const CSV_PERFORMANCE_URL = 'COLE_AQUI_A_URL_RAW_DO_ARQUIVO_PERFORMANCE';
+
+    // Perfis fixos / contexto operacional
+    const PERFIS_FIXOS = {
+      'WM': 'TESTE',
+      'SM': 'RESTRICAO_ESPACO',
+      'TR CARGO': 'OPERADOR_PRINCIPAL',
+      'CPP': 'OPERADOR_PRINCIPAL'
+    };
+
+    const fmtInt = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
+    const fmt2 = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const fmt4 = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+
+    let cargasBase = [];
+    let performanceBase = [];
+    let agregados = [];
+
+    // =========================================================
+    // UTILITÁRIOS
+    // =========================================================
+    function normalizeText(value) {
+      return String(value || '').replace(/\s+/g, ' ').trim().toUpperCase();
+    }
+
+    function splitFlexible(line, delimiter) {
+      const result = [];
+      let current = '';
+      let inQuotes = false;
+
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        const next = line[i + 1];
+
+        if (char === '"') {
+          if (inQuotes && next === '"') {
+            current += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === delimiter && !inQuotes) {
+          result.push(current);
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+
+      result.push(current);
+      return result;
+    }
+
+    function detectDelimiter(headerLine) {
+      if (headerLine.includes(';')) return ';';
+      if (headerLine.includes('\t')) return '\t';
+      return ',';
+    }
+
+    function parseCSVFlexible(text) {
+      const lines = text.trim().split(/\r?\n/).filter(Boolean);
+      if (!lines.length) return [];
+
+      const delimiter = detectDelimiter(lines[0]);
+      const headers = splitFlexible(lines[0], delimiter).map(h => h.trim());
+
+      return lines.slice(1).map(line => {
+        const values = splitFlexible(line, delimiter);
+        const row = {};
+        headers.forEach((header, index) => {
+          row[header] = (values[index] ?? '').trim();
+        });
+        return row;
+      });
+    }
+
+    function parseNumberBr(value) {
+      if (value == null || value === '') return 0;
+      const raw = String(value).trim();
+      const normalized = raw.replace(/\./g, '').replace(',', '.');
+      const parsed = Number(normalized);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function parseDateBr(value) {
+      const raw = String(value || '').trim();
+      if (!raw) return null;
+      const parts = raw.split('/');
+      if (parts.length !== 3) return null;
+      const [dd, mm, yyyy] = parts.map(Number);
+      const date = new Date(yyyy, mm - 1, dd);
+      return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    function formatDateTime(value) {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return String(value || '-');
+      return date.toLocaleDateString('pt-BR') + ' ' + date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function weeksInPeriod(rows) {
+      const dates = rows.map(r => r.dataObj).filter(Boolean);
+      if (!dates.length) return 4;
+
+      const min = new Date(Math.min(...dates));
+      const max = new Date(Math.max(...dates));
+      const diffDays = Math.max(1, Math.ceil((max - min) / (1000 * 60 * 60 * 24)) + 1);
+      return Math.max(1, diffDays / 7);
+    }
+
+    function perfilLabel(name) {
+      const perfil = PERFIS_FIXOS[name] || 'PADRAO';
+      if (perfil === 'TESTE') return 'Parceiro em teste';
+      if (perfil === 'RESTRICAO_ESPACO') return 'Espaço restrito';
+      if (perfil === 'OPERADOR_PRINCIPAL') return 'Capacidade principal';
+      return 'Operação padrão';
+    }
+
+    function badgeClass(classificacao) {
+      if (classificacao === 'PRIORIZAR') return 'good';
+      if (classificacao === 'MONITORAR') return 'warn';
+      if (classificacao === 'REDUZIR') return 'bad';
+      return 'info';
+    }
+
+    function progressClass(score) {
+      if (score >= 85) return 'progress-good';
+      if (score >= 70) return 'progress-warn';
+      return 'progress-bad';
+    }
+
+    function classificar(score, perfil, ocupacao, sla) {
+      if (perfil === 'TESTE') return 'TESTE';
+      if (ocupacao > 100 || sla < 75) return 'REDUZIR';
+      if (score >= 85) return 'PRIORIZAR';
+      if (score >= 70) return 'MONITORAR';
+      return 'REDUZIR';
+    }
+
+    // =========================================================
+    // MOCKS (para visualizar enquanto não cola as URLs)
+    // =========================================================
+    function loadMockData() {
+      cargasBase = [
+        { data:'06/01/2026', mes:'JAN', transportadora:'VEP', m3:40.1624, kg:9206.878 },
+        { data:'07/01/2026', mes:'JAN', transportadora:'VEP', m3:32.6191, kg:6664.212 },
+        { data:'12/01/2026', mes:'JAN', transportadora:'SM', m3:85.1107, kg:17785.828 },
+        { data:'16/01/2026', mes:'JAN', transportadora:'TR CARGO', m3:56.3267, kg:12218.604 },
+        { data:'20/01/2026', mes:'JAN', transportadora:'VEP', m3:91.3582, kg:19474.488 },
+        { data:'03/02/2026', mes:'FEV', transportadora:'SM', m3:66.8568, kg:15408.348 },
+        { data:'05/02/2026', mes:'FEV', transportadora:'TR CARGO', m3:43.7068, kg:10312.56 },
+        { data:'24/02/2026', mes:'FEV', transportadora:'TR CARGO', m3:103.4091, kg:20710.718 },
+        { data:'09/03/2026', mes:'MAR', transportadora:'CPP', m3:75.4961, kg:14958.836 },
+        { data:'18/03/2026', mes:'MAR', transportadora:'WM', m3:63.5293, kg:14155.852 },
+        { data:'26/03/2026', mes:'MAR', transportadora:'FTB', m3:88.5904, kg:17401.116 },
+        { data:'01/04/2026', mes:'ABR', transportadora:'CPP', m3:90.5330, kg:20659 },
+        { data:'01/04/2026', mes:'ABR', transportadora:'FTB', m3:91.2029, kg:23861.224 },
+        { data:'01/04/2026', mes:'ABR', transportadora:'TR CARGO', m3:86.7284, kg:20613.456 },
+        { data:'01/04/2026', mes:'ABR', transportadora:'VEP', m3:87.2528, kg:20452.004 },
+        { data:'01/04/2026', mes:'ABR', transportadora:'WM', m3:11.8303, kg:2837.12 }
+      ].map(r => ({ ...r, dataObj: parseDateBr(r.data) }));
+
+      performanceBase = [
+        { transportadora:'WM', atrasadas:4, emDia:2, capacidadeSemanal:2 },
+        { transportadora:'VEP', atrasadas:15, emDia:44, capacidadeSemanal:3 },
+        { transportadora:'TR CARGO', atrasadas:5, emDia:55, capacidadeSemanal:5 },
+        { transportadora:'SM', atrasadas:1, emDia:0, capacidadeSemanal:2 },
+        { transportadora:'FTB', atrasadas:20, emDia:18, capacidadeSemanal:2 },
+        { transportadora:'CPP', atrasadas:54, emDia:117, capacidadeSemanal:5 }
+      ];
+    }
+
+    // =========================================================
+    // LEITURA DOS 2 CSVs
+    // =========================================================
+    async function loadData() {
+      const usingMock = CSV_CARGAS_URL.includes('COLE_AQUI') || CSV_PERFORMANCE_URL.includes('COLE_AQUI');
+
+      if (usingMock) {
+        loadMockData();
+        initFilters();
+        refreshDashboard();
+        return;
+      }
+
+      const [cargasResponse, performanceResponse] = await Promise.all([
+        fetch(CSV_CARGAS_URL + '?t=' + Date.now()),
+        fetch(CSV_PERFORMANCE_URL + '?t=' + Date.now())
+      ]);
+
+      const [cargasText, performanceText] = await Promise.all([
+        cargasResponse.text(),
+        performanceResponse.text()
+      ]);
+
+      const cargasRows = parseCSVFlexible(cargasText);
+      const performanceRows = parseCSVFlexible(performanceText);
+
+      cargasBase = cargasRows.map(row => ({
+        data: row['DATA'] || row['Data'] || row['data'] || '',
+        mes: normalizeText(row['MÊS'] || row['MES'] || row['mês'] || row['mes'] || ''),
+        transportadora: normalizeText(row['TRANSPORTADORA'] || row['Transportadora'] || row['transportadora'] || ''),
+        m3: parseNumberBr(row['M³'] || row['M3'] || row['m³'] || row['m3'] || 0),
+        kg: parseNumberBr(row['Kg'] || row['KG'] || row['kg'] || 0)
+      })).map(r => ({ ...r, dataObj: parseDateBr(r.data) }));
+
+      performanceBase = performanceRows.map(row => ({
+        transportadora: normalizeText(row['TRANSPORTADORA'] || row['Transportadora'] || row['transportadora'] || ''),
+        atrasadas: parseNumberBr(row['ATRASADOS (ENTREGAS)'] || row['ATRASADOS'] || row['Atrasados'] || row['atrasados'] || 0),
+        emDia: parseNumberBr(row['EM DIA (ENTREGAS)'] || row['EM DIA'] || row['Em dia'] || row['em dia'] || 0),
+        capacidadeSemanal: parseNumberBr(row['CAPACIDADE / carretas semanais'] || row['CAPACIDADE'] || row['Capacidade'] || row['capacidade'] || 0)
+      }));
+
+      initFilters();
+      refreshDashboard();
+    }
+
+    // =========================================================
+    // FILTROS
+    // =========================================================
+    function initFilters() {
+      const meses = ['TODOS', ...Array.from(new Set(cargasBase.map(r => r.mes).filter(Boolean))).sort()];
+      const operadores = ['TODOS', ...Array.from(new Set(cargasBase.map(r => r.transportadora).filter(Boolean))).sort()];
+
+      setSelectOptions('mesFilter', meses);
+      setSelectOptions('operadorFilter', operadores);
+    }
+
+    function setSelectOptions(id, values) {
+      document.getElementById(id).innerHTML = values.map(v => `<option value="${v}">${v}</option>`).join('');
+    }
+
+    // =========================================================
+    // AGREGAÇÃO E CRUZAMENTO DAS BASES
+    // =========================================================
+    function aggregateData() {
+      const mes = document.getElementById('mesFilter').value || 'TODOS';
+      const operador = document.getElementById('operadorFilter').value || 'TODOS';
+      const status = document.getElementById('statusFilter').value || 'TODOS';
+      const sortBy = document.getElementById('sortFilter').value || 'score';
+      const direction = document.getElementById('directionFilter').value || 'desc';
+
+      let filteredCargas = [...cargasBase];
+      if (mes !== 'TODOS') filteredCargas = filteredCargas.filter(r => r.mes === mes);
+      if (operador !== 'TODOS') filteredCargas = filteredCargas.filter(r => r.transportadora === operador);
+
+      const totalM3 = filteredCargas.reduce((sum, row) => sum + row.m3, 0);
+      const weeks = weeksInPeriod(filteredCargas);
+      const byOperator = new Map();
+      const perfMap = new Map(performanceBase.map(r => [r.transportadora, r]));
+
+      filteredCargas.forEach(row => {
+        if (!byOperator.has(row.transportadora)) {
+          byOperator.set(row.transportadora, {
+            transportadora: row.transportadora,
+            m3: 0,
+            kg: 0
+          });
+        }
+        const item = byOperator.get(row.transportadora);
+        item.m3 += row.m3;
+        item.kg += row.kg;
+      });
+
+      // garante operadores da base de performance também, mesmo se não tiverem volume no filtro
+      performanceBase.forEach(row => {
+        if ((operador === 'TODOS' || row.transportadora === operador) && !byOperator.has(row.transportadora)) {
+          byOperator.set(row.transportadora, {
+            transportadora: row.transportadora,
+            m3: 0,
+            kg: 0
+          });
+        }
+      });
+
+      agregados = Array.from(byOperator.values()).map(item => {
+        const perf = perfMap.get(item.transportadora) || { atrasadas: 0, emDia: 0, capacidadeSemanal: 0 };
+        const totalEntregas = perf.emDia + perf.atrasadas;
+        const sla = totalEntregas > 0 ? (perf.emDia / totalEntregas) * 100 : 0;
+        const atrasoPct = totalEntregas > 0 ? (perf.atrasadas / totalEntregas) * 100 : 0;
+        const kgm3 = item.m3 > 0 ? item.kg / item.m3 : 0;
+        const carretasEq = item.m3 / M3_POR_CARRETA;
+        const mediaSemanal = weeks > 0 ? carretasEq / weeks : 0;
+        const ocupacao = perf.capacidadeSemanal > 0 ? (mediaSemanal / perf.capacidadeSemanal) * 100 : 0;
+        const participacao = totalM3 > 0 ? (item.m3 / totalM3) * 100 : 0;
+        const risco = (participacao * atrasoPct) / 100;
+        const perfil = PERFIS_FIXOS[item.transportadora] || 'PADRAO';
+
+        let score =
+          (sla * 0.45) +
+          ((100 - clamp(ocupacao, 0, 100)) * 0.25) +
+          ((100 - clamp(risco * 4, 0, 100)) * 0.15) +
+          ((100 - clamp(participacao, 0, 100)) * 0.15);
+
+        if (perfil === 'RESTRICAO_ESPACO') score -= 12;
+        if (perfil === 'TESTE') score -= 5;
+        score = clamp(score, 0, 100);
+
+        const classificacao = classificar(score, perfil, ocupacao, sla);
+
+        return {
+          transportadora: item.transportadora,
+          perfil,
+          m3: item.m3,
+          kg: item.kg,
+          kgm3,
+          carretasEq,
+          mediaSemanal,
+          capacidadeSemanal: perf.capacidadeSemanal,
+          ocupacao,
+          emDia: perf.emDia,
+          atrasadas: perf.atrasadas,
+          sla,
+          atrasoPct,
+          participacao,
+          risco,
+          score,
+          classificacao
+        };
+      }).filter(item => status === 'TODOS' ? true : item.classificacao === status);
+
+      const sortFieldMap = {
+        score: 'score',
+        sla: 'sla',
+        risco: 'risco',
+        ocupacao: 'ocupacao',
+        carretasEq: 'carretasEq',
+        m3: 'm3'
+      };
+
+      const field = sortFieldMap[sortBy] || 'score';
+      const multiplier = direction === 'asc' ? 1 : -1;
+      agregados.sort((a, b) => (a[field] - b[field]) * multiplier);
+
+      return { filteredCargas, weeks };
+    }
+
+    // =========================================================
+    // RENDER
+    // =========================================================
+    function renderMeta(filteredCargas, weeks) {
+      const dates = filteredCargas.map(r => r.dataObj).filter(Boolean).sort((a, b) => a - b);
+      const periodText = dates.length
+        ? `${dates[0].toLocaleDateString('pt-BR')} até ${dates[dates.length - 1].toLocaleDateString('pt-BR')}`
+        : '-';
+
+      document.getElementById('metaUpdated').textContent = formatDateTime(new Date().toISOString());
+      document.getElementById('metaPeriod').textContent = `${periodText} | ${fmt2.format(weeks)} semanas`;
+      document.getElementById('metaOperators').textContent = fmtInt.format(agregados.length);
+    }
+
+    function renderCards() {
+      const totalM3 = agregados.reduce((sum, row) => sum + row.m3, 0);
+      const totalKg = agregados.reduce((sum, row) => sum + row.kg, 0);
+      const totalCarretasEq = agregados.reduce((sum, row) => sum + row.carretasEq, 0);
+      const totalEmDia = agregados.reduce((sum, row) => sum + row.emDia, 0);
+      const totalAtrasadas = agregados.reduce((sum, row) => sum + row.atrasadas, 0);
+      const totalEntregas = totalEmDia + totalAtrasadas;
+      const slaGeral = totalEntregas > 0 ? (totalEmDia / totalEntregas) * 100 : 0;
+      const melhor = [...agregados].sort((a, b) => b.score - a.score)[0];
+      const maiorRisco = [...agregados].sort((a, b) => b.risco - a.risco)[0];
+      const maiorOcupacao = [...agregados].sort((a, b) => b.ocupacao - a.ocupacao)[0];
+
+      const cards = [
+        { cls:'top-accent', title:'SLA geral', value:`${fmt2.format(slaGeral)}%`, sub:`${fmtInt.format(totalEmDia)} em dia | ${fmtInt.format(totalAtrasadas)} atrasadas` },
+        { cls:'top-info', title:'Volume total', value:`${fmt2.format(totalM3)} m³`, sub:`${fmtInt.format(totalKg)} kg movimentados` },
+        { cls:'top-accent', title:'Carretas equivalentes', value: fmt2.format(totalCarretasEq), sub:`Baseado em ${M3_POR_CARRETA} m³ por carreta` },
+        { cls:'top-good', title:'Melhor score', value: melhor ? melhor.transportadora : '-', sub: melhor ? `Score ${fmt2.format(melhor.score)} | SLA ${fmt2.format(melhor.sla)}%` : '-' },
+        { cls:'top-bad', title:'Maior risco', value: maiorRisco ? maiorRisco.transportadora : '-', sub: maiorRisco ? `Risco ${fmt2.format(maiorRisco.risco)} | atraso ${fmt2.format(maiorRisco.atrasoPct)}%` : '-' },
+        { cls:'top-warn', title:'Maior ocupação', value: maiorOcupacao ? maiorOcupacao.transportadora : '-', sub: maiorOcupacao ? `${fmt2.format(maiorOcupacao.ocupacao)}% da capacidade semanal` : '-' }
+      ];
+
+      document.getElementById('cards').innerHTML = cards.map(card => `
+        <div class="card ${card.cls}">
+          <div class="kpi-title">${card.title}</div>
+          <div class="kpi-value">${card.value}</div>
+          <div class="kpi-sub">${card.sub}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderTable() {
+      document.getElementById('tableBody').innerHTML = agregados.map(row => `
+        <tr>
+          <td><strong>${row.transportadora}</strong></td>
+          <td>${perfilLabel(row.transportadora)}</td>
+          <td>${fmt2.format(row.m3)}</td>
+          <td>${fmtInt.format(row.kg)}</td>
+          <td>${fmt2.format(row.kgm3)}</td>
+          <td>${fmt2.format(row.carretasEq)}</td>
+          <td>${fmt2.format(row.mediaSemanal)}</td>
+          <td>${row.capacidadeSemanal ? fmt2.format(row.capacidadeSemanal) : '-'}</td>
+          <td class="${row.ocupacao > 100 ? 'text-bad' : row.ocupacao >= 80 ? 'text-warn' : 'text-good'}">${fmt2.format(row.ocupacao)}%</td>
+          <td>${fmtInt.format(row.emDia)}</td>
+          <td>${fmtInt.format(row.atrasadas)}</td>
+          <td class="${row.sla >= 90 ? 'text-good' : row.sla >= 80 ? 'text-warn' : 'text-bad'}">${fmt2.format(row.sla)}%</td>
+          <td>${fmt2.format(row.participacao)}%</td>
+          <td class="${row.risco >= 8 ? 'text-bad' : row.risco >= 4 ? 'text-warn' : 'text-good'}">${fmt2.format(row.risco)}</td>
+          <td><strong>${fmt2.format(row.score)}</strong></td>
+          <td><span class="badge ${badgeClass(row.classificacao)}">${row.classificacao}</span></td>
+        </tr>
+      `).join('');
+    }
+
+    function renderRanking() {
+      document.getElementById('rankingList').innerHTML = agregados.map(row => `
+        <div class="rank-item">
+          <div class="rank-top">
+            <div class="rank-name">${row.transportadora}</div>
+            <div class="rank-score">${fmt2.format(row.score)}</div>
+          </div>
+          <div class="progress"><div class="progress-bar ${progressClass(row.score)}" style="width:${row.score}%"></div></div>
+          <div class="rank-meta">
+            <div>SLA: <strong>${fmt2.format(row.sla)}%</strong></div>
+            <div>Oc.: <strong>${fmt2.format(row.ocupacao)}%</strong></div>
+            <div>Carretas: <strong>${fmt2.format(row.carretasEq)}</strong></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderRadar() {
+      const melhor = [...agregados].sort((a, b) => b.score - a.score)[0];
+      const pior = [...agregados].sort((a, b) => a.score - b.score)[0];
+      const maiorRisco = [...agregados].sort((a, b) => b.risco - a.risco)[0];
+      const maiorOcupacao = [...agregados].sort((a, b) => b.ocupacao - a.ocupacao)[0];
+
+      const boxes = [
+        {
+          title: 'Melhor operador atual',
+          value: melhor ? melhor.transportadora : '-',
+          sub: melhor ? `Score ${fmt2.format(melhor.score)} | SLA ${fmt2.format(melhor.sla)}%` : '-'
+        },
+        {
+          title: 'Pior operador atual',
+          value: pior ? pior.transportadora : '-',
+          sub: pior ? `Score ${fmt2.format(pior.score)} | risco ${fmt2.format(pior.risco)}` : '-'
+        },
+        {
+          title: 'Maior risco operacional',
+          value: maiorRisco ? maiorRisco.transportadora : '-',
+          sub: maiorRisco ? `Risco ${fmt2.format(maiorRisco.risco)} | atraso ${fmt2.format(maiorRisco.atrasoPct)}%` : '-'
+        },
+        {
+          title: 'Maior ocupação',
+          value: maiorOcupacao ? maiorOcupacao.transportadora : '-',
+          sub: maiorOcupacao ? `${fmt2.format(maiorOcupacao.ocupacao)}% da capacidade semanal` : '-'
+        }
+      ];
+
+      document.getElementById('radarGrid').innerHTML = boxes.map(box => `
+        <div class="mini-box">
+          <div class="mini-title">${box.title}</div>
+          <div class="mini-value">${box.value}</div>
+          <div class="mini-sub">${box.sub}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderInsights() {
+      const melhor = [...agregados].sort((a, b) => b.score - a.score)[0];
+      const maiorRisco = [...agregados].sort((a, b) => b.risco - a.risco)[0];
+      const sm = agregados.find(r => r.transportadora === 'SM');
+      const wm = agregados.find(r => r.transportadora === 'WM');
+      const saturados = agregados.filter(r => r.ocupacao >= 90).map(r => r.transportadora);
+
+      const insights = [];
+
+      if (melhor) {
+        insights.push(`
+          <div class="mini-box">
+            <div class="mini-title">Direção principal</div>
+            <div class="mini-sub"><strong>${melhor.transportadora}</strong> aparece como melhor opção no recorte atual, com score <span class="text-good">${fmt2.format(melhor.score)}</span> e SLA <span class="text-good">${fmt2.format(melhor.sla)}%</span>.</div>
+          </div>
+        `);
+      }
+
+      if (maiorRisco) {
+        insights.push(`
+          <div class="mini-box">
+            <div class="mini-title">Atenção imediata</div>
+            <div class="mini-sub"><strong>${maiorRisco.transportadora}</strong> concentra o maior risco do painel, combinando atraso e participação no volume.</div>
+          </div>
+        `);
+      }
+
+      if (sm) {
+        insights.push(`
+          <div class="mini-box">
+            <div class="mini-title">Restrição estrutural</div>
+            <div class="mini-sub"><strong>SM</strong> segue com limitação física. Mesmo com histórico relevante de volume, a régua precisa respeitar a capacidade semanal fixa.</div>
+          </div>
+        `);
+      }
+
+      if (wm) {
+        insights.push(`
+          <div class="mini-box">
+            <div class="mini-title">Parceiro em teste</div>
+            <div class="mini-sub"><strong>WM</strong> é acompanhada como parceiro em teste. O score sofre ajuste menor para evitar conclusões precoces com base curta.</div>
+          </div>
+        `);
+      }
+
+      if (saturados.length) {
+        insights.push(`
+          <div class="mini-box">
+            <div class="mini-title">Capacidade pressionada</div>
+            <div class="mini-sub">Operadores acima de 90% de ocupação no recorte: <strong>${saturados.join(', ')}</strong>.</div>
+          </div>
+        `);
+      }
+
+      document.getElementById('insightsBox').innerHTML = insights.join('');
+    }
+
+    function refreshDashboard() {
+      const { filteredCargas, weeks } = aggregateData();
+      renderMeta(filteredCargas, weeks);
+      renderCards();
+      renderTable();
+      renderRanking();
+      renderRadar();
+      renderInsights();
+    }
+
+    ['mesFilter', 'operadorFilter', 'statusFilter', 'sortFilter', 'directionFilter'].forEach(id => {
+      document.addEventListener('change', event => {
+        if (event.target && event.target.id === id) refreshDashboard();
+      });
+    });
+
+    document.getElementById('reloadBtn').addEventListener('click', loadData);
+    loadData();
+  </script>
+</body>
+</html>
