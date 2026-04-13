@@ -1,15 +1,7 @@
-TRANSPORTADORA;ATRASADOS (ENTREGAS);EM DIA (ENTREGAS);CAPACIDADE / carretas semanais;;
-WM;4;2;2;;
-VEP;15;44;3;;
-TR CARGO;5;55;5;;
-SM;1;0;2;;
-FTB;20;18;2;;
-CPP;54;117;5;;
-;;;;;
-;;;;;
-;;;;;
-;;;;;
-;;;;;
-;;;;;
-;;;;;
-;;;;;
+TRANSPORTADORA;ATRASADOS (ENTREGAS);EM DIA (ENTREGAS);CAPACIDADE / carretas semanais
+WM;3;0;2
+VEP;19;48;3
+TR CARGO;6;64;5
+SM;1;0;2
+FTB;15;30;2
+CPP;38;88;5
