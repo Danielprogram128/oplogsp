@@ -22,19 +22,16 @@
     }
 
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
       background: linear-gradient(180deg, #0b1020 0%, #111827 100%);
     }
-
     .wrap {
-      width: min(1650px, calc(100% - 24px));
+      width: min(1700px, calc(100% - 24px));
       margin: 16px auto 36px;
     }
-
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -43,32 +40,27 @@
       flex-wrap: wrap;
       margin-bottom: 16px;
     }
-
     h1 {
       margin: 0 0 6px;
       font-size: 28px;
       color: #fff;
     }
-
     .subtitle {
       color: var(--muted);
       font-size: 13px;
       line-height: 1.45;
       max-width: 980px;
     }
-
     .panel, .meta-box, .card {
       background: rgba(17, 24, 39, 0.94);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
-
     .meta-box {
       min-width: 360px;
       padding: 12px 14px;
     }
-
     .meta-row {
       display: grid;
       grid-template-columns: 170px 1fr;
@@ -76,7 +68,6 @@
       font-size: 12px;
       margin-bottom: 6px;
     }
-
     .meta-row:last-child { margin-bottom: 0; }
     .meta-label { color: var(--muted); }
     .meta-value { color: #fff; font-weight: 700; }
@@ -92,16 +83,13 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
-
     .field { display: flex; flex-direction: column; gap: 6px; }
-
     .field label {
       font-size: 11px;
       text-transform: uppercase;
       color: var(--muted);
       letter-spacing: 0.35px;
     }
-
     .field select, .field button {
       height: 38px;
       border-radius: 10px;
@@ -111,11 +99,7 @@
       padding: 0 10px;
       font-size: 13px;
     }
-
-    .field button {
-      cursor: pointer;
-      font-weight: 700;
-    }
+    .field button { cursor: pointer; font-weight: 700; }
 
     .cards {
       display: grid;
@@ -123,67 +107,40 @@
       gap: 12px;
       margin-bottom: 16px;
     }
-
     .card {
       padding: 14px;
       min-height: 108px;
       border-top: 3px solid transparent;
     }
-
     .top-good { border-top-color: var(--good); }
     .top-warn { border-top-color: var(--warn); }
     .top-bad { border-top-color: var(--bad); }
     .top-info { border-top-color: var(--info); }
     .top-accent { border-top-color: var(--accent); }
+    .kpi-title { font-size: 11px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .kpi-value { font-size: 28px; font-weight: 800; color: #fff; line-height: 1; margin-bottom: 8px; }
+    .kpi-sub { font-size: 12px; color: var(--muted); line-height: 1.4; }
 
-    .kpi-title {
-      font-size: 11px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    .kpi-value {
-      font-size: 28px;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .kpi-sub {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.4;
-    }
-
-    .grid {
+    .main-grid {
       display: grid;
-      grid-template-columns: 2.25fr 1fr;
+      grid-template-columns: 2.2fr 1fr;
       gap: 16px;
       margin-bottom: 16px;
     }
-
+    .lower-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
     .panel-header {
       padding: 14px 16px;
       border-bottom: 1px solid var(--line);
       background: rgba(2, 6, 23, 0.35);
     }
-
-    .panel-title {
-      font-size: 15px;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-
-    .panel-subtitle {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
+    .panel-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .panel-subtitle { font-size: 12px; color: var(--muted); }
     .panel-body { padding: 14px 16px 16px; }
-
     .table-wrap { overflow: auto; }
 
     table {
@@ -191,7 +148,6 @@
       border-collapse: collapse;
       min-width: 1380px;
     }
-
     th, td {
       padding: 10px 8px;
       font-size: 12px;
@@ -199,7 +155,6 @@
       white-space: nowrap;
       border-bottom: 1px solid rgba(148, 163, 184, 0.12);
     }
-
     th {
       position: sticky;
       top: 0;
@@ -210,10 +165,58 @@
       text-transform: uppercase;
       letter-spacing: 0.35px;
     }
-
     th:first-child, td:first-child { text-align: left; }
-
     tr:hover td { background: rgba(250, 204, 21, 0.05); }
+
+    .ranking-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .rank-card {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      min-height: 138px;
+    }
+    .rank-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .rank-name {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.05;
+    }
+    .rank-score {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .progress {
+      height: 8px;
+      background: #1e293b;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .progress-bar { height: 100%; border-radius: 999px; }
+    .progress-good { background: var(--good); }
+    .progress-warn { background: var(--warn); }
+    .progress-bad { background: var(--bad); }
+    .rank-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      font-size: 11px;
+      color: var(--muted);
+    }
 
     .badge {
       display: inline-flex;
@@ -223,86 +226,27 @@
       font-size: 11px;
       font-weight: 700;
     }
-
     .badge.good { background: rgba(34, 197, 94, 0.14); color: #86efac; }
     .badge.warn { background: rgba(245, 158, 11, 0.14); color: #fcd34d; }
     .badge.bad { background: rgba(239, 68, 68, 0.14); color: #fca5a5; }
     .badge.info { background: rgba(56, 189, 248, 0.14); color: #7dd3fc; }
-
     .text-good { color: #86efac; }
     .text-warn { color: #fcd34d; }
     .text-bad { color: #fca5a5; }
     .text-info { color: #7dd3fc; }
 
-    .ranking-list, .mini-grid { display: grid; gap: 10px; }
-
-    .rank-item, .mini-box {
+    .mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .mini-box {
       background: var(--panel-2);
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 12px;
     }
+    .mini-title { font-size: 11px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .mini-value { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .mini-sub { font-size: 12px; color: var(--muted); line-height: 1.35; }
 
-    .rank-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .rank-name { font-weight: 800; color: #fff; }
-    .rank-score { font-weight: 800; color: var(--accent); }
-
-    .progress {
-      height: 8px;
-      background: #1e293b;
-      border-radius: 999px;
-      overflow: hidden;
-      margin-bottom: 8px;
-    }
-
-    .progress-bar { height: 100%; border-radius: 999px; }
-    .progress-good { background: var(--good); }
-    .progress-warn { background: var(--warn); }
-    .progress-bad { background: var(--bad); }
-
-    .rank-meta {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .mini-grid { grid-template-columns: repeat(2, 1fr); }
-
-    .mini-title {
-      font-size: 11px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .mini-value {
-      font-size: 22px;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-
-    .mini-sub {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.35;
-    }
-
-    .footer-note {
-      margin-top: 12px;
-      font-size: 11px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
+    .footer-note { margin-top: 12px; font-size: 11px; color: var(--muted); line-height: 1.5; }
     .error-box {
       margin-top: 12px;
       padding: 12px;
@@ -315,18 +259,48 @@
       display: none;
     }
 
+    .chart-wrap { width: 100%; overflow: auto; }
+    .chart-svg {
+      width: 100%;
+      min-width: 620px;
+      height: 330px;
+      display: block;
+    }
+    .legend {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    @media (max-width: 1400px) {
+      .ranking-grid { grid-template-columns: repeat(3, minmax(180px, 1fr)); }
+      .cards { grid-template-columns: repeat(3, minmax(180px, 1fr)); }
+    }
     @media (max-width: 1200px) {
       .filters { grid-template-columns: repeat(3, 1fr); }
       .cards { grid-template-columns: repeat(3, 1fr); }
-      .grid { grid-template-columns: 1fr; }
+      .main-grid, .lower-grid { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 760px) {
       .wrap { width: min(100% - 12px, 100%); }
       h1 { font-size: 22px; }
       .filters { grid-template-columns: repeat(2, 1fr); }
       .cards { grid-template-columns: repeat(2, 1fr); }
-      .mini-grid, .rank-meta { grid-template-columns: 1fr; }
+      .ranking-grid, .mini-grid, .rank-meta { grid-template-columns: 1fr; }
       .kpi-value { font-size: 24px; }
     }
   </style>
@@ -351,8 +325,11 @@
 
     <div class="filters">
       <div class="field">
-        <label for="mesFilter">Mês</label>
-        <select id="mesFilter"></select>
+        <label for="mesFilter">Data</label>
+        <select id="mesFilter">
+          <option value="TODOS">Todos</option>
+          <option value="ULTIMOS_7_DIAS">Últimos 7 dias</option>
+        </select>
       </div>
       <div class="field">
         <label for="operadorFilter">Transportadora</label>
@@ -394,7 +371,7 @@
 
     <div class="cards" id="cards"></div>
 
-    <div class="grid">
+    <div class="main-grid">
       <div class="panel">
         <div class="panel-header">
           <div class="panel-title">Matriz Analítica por Operador</div>
@@ -424,32 +401,15 @@
             </thead>
             <tbody id="tableBody"></tbody>
           </table>
-        </div>
-      </div>
 
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">Ranking e Decisão</div>
-          <div class="panel-subtitle">Leitura prática para distribuição de volume</div>
-        </div>
-        <div class="panel-body">
-          <div class="ranking-list" id="rankingList"></div>
-          <div class="footer-note">
-            Score sugerido: 45% SLA + 25% folga de capacidade + 15% risco + 15% equilíbrio de participação.<br>
-            WM = parceiro em teste. SM = limitação física. Uma carreta = 90 m³.
+          <div style="margin-top:18px;">
+            <div class="panel-title" style="margin-bottom:4px;">Ranking e Decisão</div>
+            <div class="panel-subtitle">Leitura prática para distribuição de volume com mais evidência visual</div>
+            <div class="ranking-grid" id="rankingGrid"></div>
+            <div class="footer-note">Score sugerido: 45% SLA + 25% folga de capacidade + 15% risco + 15% equilíbrio de participação. Uma carreta = 90 m³.</div>
+            <div id="errorBox" class="error-box"></div>
           </div>
-          <div id="errorBox" class="error-box"></div>
         </div>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">Radar Operacional</div>
-          <div class="panel-subtitle">Melhor score, maior risco, maior ocupação e principal observação</div>
-        </div>
-        <div class="panel-body mini-grid" id="radarGrid"></div>
       </div>
 
       <div class="panel">
@@ -460,21 +420,44 @@
         <div class="panel-body" id="insightsBox"></div>
       </div>
     </div>
+
+    <div class="lower-grid">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Gráfico de Evolução</div>
+          <div class="panel-subtitle">Evolução mensal de m³ por transportadora dentro do período disponível</div>
+        </div>
+        <div class="panel-body">
+          <div class="chart-wrap">
+            <svg id="evolutionChart" class="chart-svg" viewBox="0 0 900 330" preserveAspectRatio="none"></svg>
+          </div>
+          <div class="legend" id="chartLegend"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Radar Operacional</div>
+          <div class="panel-subtitle">Melhor score, maior risco, maior ocupação e principal observação</div>
+        </div>
+        <div class="panel-body mini-grid" id="radarGrid"></div>
+      </div>
+    </div>
   </div>
 
   <script>
     const M3_POR_CARRETA = 90;
-
     const CSV_CARGAS_URL = 'https://raw.githubusercontent.com/Danielprogram128/oplogsp/main/cargas_diarias.csv';
     const CSV_PERFORMANCE_URL = 'https://raw.githubusercontent.com/Danielprogram128/oplogsp/main/performance_operadores.csv';
 
     const PERFIS_FIXOS = {
-      'WM': 'TESTE',
-      'SM': 'RESTRICAO_ESPACO',
+      'WM': 'PADRAO',
+      'SM': 'PADRAO',
       'TR CARGO': 'OPERADOR_PRINCIPAL',
       'CPP': 'OPERADOR_PRINCIPAL'
     };
 
+    const CHART_COLORS = ['#38bdf8', '#facc15', '#22c55e', '#ef4444', '#a78bfa', '#fb7185', '#2dd4bf', '#f59e0b'];
     const fmtInt = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
     const fmt2 = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -567,11 +550,7 @@
     function parseNumberBr(value) {
       if (value == null || value === '') return 0;
       const raw = String(value).trim();
-
-      if (/^-?\d+(\.\d+)?$/.test(raw)) {
-        return Number(raw);
-      }
-
+      if (/^-?\d+(\.\d+)?$/.test(raw)) return Number(raw);
       const normalized = raw.replace(/\./g, '').replace(',', '.');
       const parsed = Number(normalized);
       return Number.isFinite(parsed) ? parsed : 0;
@@ -600,7 +579,6 @@
     function weeksInPeriod(rows) {
       const dates = rows.map(r => r.dataObj).filter(Boolean);
       if (!dates.length) return 4;
-
       const min = new Date(Math.min(...dates));
       const max = new Date(Math.max(...dates));
       const diffDays = Math.max(1, Math.ceil((max - min) / (1000 * 60 * 60 * 24)) + 1);
@@ -609,8 +587,6 @@
 
     function perfilLabel(name) {
       const perfil = PERFIS_FIXOS[name] || 'PADRAO';
-      if (perfil === 'TESTE') return 'Parceiro em teste';
-      if (perfil === 'RESTRICAO_ESPACO') return 'Espaço restrito';
       if (perfil === 'OPERADOR_PRINCIPAL') return 'Capacidade principal';
       return 'Operação padrão';
     }
@@ -638,7 +614,6 @@
 
     async function loadData() {
       hideError();
-
       try {
         const [cargasResponse, performanceResponse] = await Promise.all([
           fetch(CSV_CARGAS_URL + '?t=' + Date.now()),
@@ -662,68 +637,71 @@
           transportadora: normalizeText(row['TRANSPORTADORA'] || ''),
           m3: parseNumberBr(row['M3'] || 0),
           kg: parseNumberBr(row['KG'] || 0)
-        }))
-        .filter(r => r.transportadora)
-        .map(r => ({ ...r, dataObj: parseDateBr(r.data) }));
+        })).filter(r => r.transportadora).map(r => ({ ...r, dataObj: parseDateBr(r.data) }));
 
         performanceBase = performanceRows.map(row => ({
           transportadora: normalizeText(row['TRANSPORTADORA'] || ''),
           atrasadas: parseNumberBr(row['ATRASADOSENTREGAS'] || 0),
           emDia: parseNumberBr(row['EMDIAENTREGAS'] || 0),
           capacidadeSemanal: parseNumberBr(row['CAPACIDADECARRETASSEMANAIS'] || 0)
-        }))
-        .filter(r => r.transportadora);
+        })).filter(r => r.transportadora);
 
-        if (!cargasBase.length) {
-          throw new Error('O arquivo cargas_diarias.csv veio vazio ou fora do formato esperado.');
-        }
-
-        if (!performanceBase.length) {
-          throw new Error('O arquivo performance_operadores.csv veio vazio ou fora do formato esperado.');
-        }
+        if (!cargasBase.length) throw new Error('O arquivo cargas_diarias.csv veio vazio ou fora do formato esperado.');
+        if (!performanceBase.length) throw new Error('O arquivo performance_operadores.csv veio vazio ou fora do formato esperado.');
 
         initFilters();
         refreshDashboard();
       } catch (error) {
         console.error(error);
         showError(
-          `<strong>Erro ao carregar os dados.</strong><br>` +
-          `${error.message}<br><br>` +
+          `<strong>Erro ao carregar os dados.</strong><br>${error.message}<br><br>` +
           `Confira estes pontos:<br>` +
           `1. Os dois CSVs precisam estar públicos no GitHub.<br>` +
           `2. O separador ideal é <strong>;</strong>.<br>` +
-          `3. O CSV de cargas deve ter: <strong>DATA;MÊS;TRANSPORTADORA;M³;Kg</strong>.<br>` +
-          `4. O CSV de performance deve ter: <strong>TRANSPORTADORA;ATRASADOS (ENTREGAS);EM DIA (ENTREGAS);CAPACIDADE / carretas semanais</strong>.`
+          `3. O CSV de cargas deve ter: <strong>DATA;MES;TRANSPORTADORA;M3;KG</strong>.<br>` +
+          `4. O CSV de performance deve ter: <strong>TRANSPORTADORA;ATRASADOS_ENTREGAS;EM_DIA_ENTREGAS;CAPACIDADE_CARRETAS_SEMANAIS</strong>.`
         );
       }
     }
 
     function initFilters() {
-      const meses = ['TODOS', ...Array.from(new Set(cargasBase.map(r => r.mes).filter(Boolean))).sort()];
       const operadores = ['TODOS', ...Array.from(new Set([
         ...cargasBase.map(r => r.transportadora).filter(Boolean),
         ...performanceBase.map(r => r.transportadora).filter(Boolean)
       ])).sort()];
 
-      setSelectOptions('mesFilter', meses);
-      setSelectOptions('operadorFilter', operadores);
+      document.getElementById('operadorFilter').innerHTML = operadores.map(v => `<option value="${v}">${v}</option>`).join('');
     }
 
-    function setSelectOptions(id, values) {
-      document.getElementById(id).innerHTML = values.map(v => `<option value="${v}">${v}</option>`).join('');
+    function buildFilteredCargas() {
+      const filtroData = document.getElementById('mesFilter').value || 'TODOS';
+      const operador = document.getElementById('operadorFilter').value || 'TODOS';
+
+      let filteredCargas = [...cargasBase];
+
+      if (filtroData === 'ULTIMOS_7_DIAS') {
+        const validDates = cargasBase.map(r => r.dataObj).filter(Boolean);
+        const maxDate = validDates.length ? new Date(Math.max(...validDates)) : new Date();
+        const startDate = new Date(maxDate);
+        startDate.setDate(maxDate.getDate() - 6);
+
+        filteredCargas = filteredCargas.filter(r => r.dataObj && r.dataObj >= startDate && r.dataObj <= maxDate);
+      }
+
+      if (operador !== 'TODOS') {
+        filteredCargas = filteredCargas.filter(r => r.transportadora === operador);
+      }
+
+      return filteredCargas;
     }
 
     function aggregateData() {
-      const mes = document.getElementById('mesFilter').value || 'TODOS';
-      const operador = document.getElementById('operadorFilter').value || 'TODOS';
       const status = document.getElementById('statusFilter').value || 'TODOS';
       const sortBy = document.getElementById('sortFilter').value || 'score';
       const direction = document.getElementById('directionFilter').value || 'desc';
+      const operador = document.getElementById('operadorFilter').value || 'TODOS';
 
-      let filteredCargas = [...cargasBase];
-      if (mes !== 'TODOS') filteredCargas = filteredCargas.filter(r => r.mes === mes);
-      if (operador !== 'TODOS') filteredCargas = filteredCargas.filter(r => r.transportadora === operador);
-
+      const filteredCargas = buildFilteredCargas();
       const totalM3 = filteredCargas.reduce((sum, row) => sum + row.m3, 0);
       const weeks = weeksInPeriod(filteredCargas);
       const byOperator = new Map();
@@ -732,11 +710,7 @@
       filteredCargas.forEach(row => {
         if (!row.transportadora) return;
         if (!byOperator.has(row.transportadora)) {
-          byOperator.set(row.transportadora, {
-            transportadora: row.transportadora,
-            m3: 0,
-            kg: 0
-          });
+          byOperator.set(row.transportadora, { transportadora: row.transportadora, m3: 0, kg: 0 });
         }
         const item = byOperator.get(row.transportadora);
         item.m3 += row.m3;
@@ -746,11 +720,7 @@
       performanceBase.forEach(row => {
         if (!row.transportadora) return;
         if ((operador === 'TODOS' || row.transportadora === operador) && !byOperator.has(row.transportadora)) {
-          byOperator.set(row.transportadora, {
-            transportadora: row.transportadora,
-            m3: 0,
-            kg: 0
-          });
+          byOperator.set(row.transportadora, { transportadora: row.transportadora, m3: 0, kg: 0 });
         }
       });
 
@@ -773,11 +743,7 @@
           ((100 - clamp(risco * 4, 0, 100)) * 0.15) +
           ((100 - clamp(participacao, 0, 100)) * 0.15);
 
-        if (perfil === 'RESTRICAO_ESPACO') score -= 12;
-        if (perfil === 'TESTE') score -= 5;
         score = clamp(score, 0, 100);
-
-        const classificacao = classificar(score, perfil, ocupacao, sla);
 
         return {
           transportadora: item.transportadora,
@@ -796,19 +762,11 @@
           participacao,
           risco,
           score,
-          classificacao
+          classificacao: classificar(score, perfil, ocupacao, sla)
         };
       }).filter(item => status === 'TODOS' ? true : item.classificacao === status);
 
-      const sortFieldMap = {
-        score: 'score',
-        sla: 'sla',
-        risco: 'risco',
-        ocupacao: 'ocupacao',
-        carretasEq: 'carretasEq',
-        m3: 'm3'
-      };
-
+      const sortFieldMap = { score: 'score', sla: 'sla', risco: 'risco', ocupacao: 'ocupacao', carretasEq: 'carretasEq', m3: 'm3' };
       const field = sortFieldMap[sortBy] || 'score';
       const multiplier = direction === 'asc' ? 1 : -1;
       agregados.sort((a, b) => (a[field] - b[field]) * multiplier);
@@ -816,14 +774,43 @@
       return { filteredCargas, weeks };
     }
 
+    function buildEvolutionSeries() {
+      const monthMap = new Map();
+      cargasBase.forEach(row => {
+        if (!row.transportadora || !row.dataObj) return;
+        const key = `${row.dataObj.getFullYear()}-${String(row.dataObj.getMonth() + 1).padStart(2, '0')}`;
+        if (!monthMap.has(key)) monthMap.set(key, { label: row.mes || key, values: {} });
+        const bucket = monthMap.get(key);
+        bucket.values[row.transportadora] = (bucket.values[row.transportadora] || 0) + row.m3;
+      });
+
+      const months = Array.from(monthMap.keys()).sort();
+      const operators = Array.from(new Set(cargasBase.map(r => r.transportadora).filter(Boolean))).sort();
+
+      return {
+        months,
+        labels: months.map(k => monthMap.get(k).label),
+        operators,
+        data: operators.map(op => ({
+          operator: op,
+          values: months.map(k => monthMap.get(k).values[op] || 0)
+        }))
+      };
+    }
+
     function renderMeta(filteredCargas, weeks) {
+      const filtroData = document.getElementById('mesFilter').value || 'TODOS';
       const dates = filteredCargas.map(r => r.dataObj).filter(Boolean).sort((a, b) => a - b);
       const periodText = dates.length
         ? `${dates[0].toLocaleDateString('pt-BR')} até ${dates[dates.length - 1].toLocaleDateString('pt-BR')}`
         : '-';
 
+      const tituloPeriodo = filtroData === 'ULTIMOS_7_DIAS'
+        ? `${periodText} | últimos 7 dias`
+        : `${periodText} | ${fmt2.format(weeks)} semanas`;
+
       document.getElementById('metaUpdated').textContent = formatDateTime(new Date().toISOString());
-      document.getElementById('metaPeriod').textContent = `${periodText} | ${fmt2.format(weeks)} semanas`;
+      document.getElementById('metaPeriod').textContent = tituloPeriodo;
       document.getElementById('metaOperators').textContent = fmtInt.format(agregados.length);
     }
 
@@ -881,20 +868,75 @@
     }
 
     function renderRanking() {
-      document.getElementById('rankingList').innerHTML = agregados.map(row => `
-        <div class="rank-item">
-          <div class="rank-top">
+      document.getElementById('rankingGrid').innerHTML = agregados.map(row => `
+        <div class="rank-card">
+          <div class="rank-head">
             <div class="rank-name">${row.transportadora}</div>
             <div class="rank-score">${fmt2.format(row.score)}</div>
           </div>
           <div class="progress"><div class="progress-bar ${progressClass(row.score)}" style="width:${row.score}%"></div></div>
           <div class="rank-meta">
-            <div>SLA: <strong>${fmt2.format(row.sla)}%</strong></div>
-            <div>Oc.: <strong>${fmt2.format(row.ocupacao)}%</strong></div>
-            <div>Carretas: <strong>${fmt2.format(row.carretasEq)}</strong></div>
+            <div>SLA:<br><strong>${fmt2.format(row.sla)}%</strong></div>
+            <div>Oc.:<br><strong>${fmt2.format(row.ocupacao)}%</strong></div>
+            <div>Carretas:<br><strong>${fmt2.format(row.carretasEq)}</strong></div>
           </div>
         </div>
       `).join('');
+    }
+
+    function renderEvolutionChart() {
+      const svg = document.getElementById('evolutionChart');
+      const legend = document.getElementById('chartLegend');
+      const series = buildEvolutionSeries();
+
+      if (!series.months.length || !series.operators.length) {
+        svg.innerHTML = '<text x="50%" y="50%" text-anchor="middle" fill="#94a3b8" font-size="16">Sem dados para evolução</text>';
+        legend.innerHTML = '';
+        return;
+      }
+
+      const width = 900, height = 330;
+      const margin = { top: 20, right: 24, bottom: 48, left: 46 };
+      const chartW = width - margin.left - margin.right;
+      const chartH = height - margin.top - margin.bottom;
+      const allValues = series.data.flatMap(s => s.values);
+      const maxVal = Math.max(...allValues, 1);
+      const stepX = series.months.length > 1 ? chartW / (series.months.length - 1) : chartW / 2;
+
+      let svgParts = [];
+      svgParts.push(`<rect x="0" y="0" width="${width}" height="${height}" fill="transparent" />`);
+
+      for (let i = 0; i <= 4; i++) {
+        const y = margin.top + (chartH / 4) * i;
+        const value = maxVal - (maxVal / 4) * i;
+        svgParts.push(`<line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="rgba(148,163,184,0.18)" stroke-width="1" />`);
+        svgParts.push(`<text x="${margin.left - 8}" y="${y + 4}" text-anchor="end" fill="#94a3b8" font-size="11">${fmtInt.format(value)}</text>`);
+      }
+
+      series.labels.forEach((label, idx) => {
+        const x = margin.left + (series.months.length === 1 ? chartW / 2 : stepX * idx);
+        svgParts.push(`<text x="${x}" y="${height - 16}" text-anchor="middle" fill="#94a3b8" font-size="11">${label}</text>`);
+      });
+
+      series.data.forEach((serie, idx) => {
+        const color = CHART_COLORS[idx % CHART_COLORS.length];
+        const points = serie.values.map((v, i) => {
+          const x = margin.left + (series.months.length === 1 ? chartW / 2 : stepX * i);
+          const y = margin.top + chartH - (v / maxVal) * chartH;
+          return { x, y, v };
+        });
+        const polyline = points.map(p => `${p.x},${p.y}`).join(' ');
+        svgParts.push(`<polyline fill="none" stroke="${color}" stroke-width="3" points="${polyline}" />`);
+        points.forEach(p => {
+          svgParts.push(`<circle cx="${p.x}" cy="${p.y}" r="4" fill="${color}" />`);
+        });
+      });
+
+      svg.innerHTML = svgParts.join('');
+      legend.innerHTML = series.data.map((serie, idx) => {
+        const color = CHART_COLORS[idx % CHART_COLORS.length];
+        return `<span class="legend-item"><span class="legend-color" style="background:${color}"></span>${serie.operator}</span>`;
+      }).join('');
     }
 
     function renderRadar() {
@@ -904,26 +946,10 @@
       const maiorOcupacao = [...agregados].sort((a, b) => b.ocupacao - a.ocupacao)[0];
 
       const boxes = [
-        {
-          title: 'Melhor operador atual',
-          value: melhor ? melhor.transportadora : '-',
-          sub: melhor ? `Score ${fmt2.format(melhor.score)} | SLA ${fmt2.format(melhor.sla)}%` : '-'
-        },
-        {
-          title: 'Pior operador atual',
-          value: pior ? pior.transportadora : '-',
-          sub: pior ? `Score ${fmt2.format(pior.score)} | risco ${fmt2.format(pior.risco)}` : '-'
-        },
-        {
-          title: 'Maior risco operacional',
-          value: maiorRisco ? maiorRisco.transportadora : '-',
-          sub: maiorRisco ? `Risco ${fmt2.format(maiorRisco.risco)} | atraso ${fmt2.format(maiorRisco.atrasoPct)}%` : '-'
-        },
-        {
-          title: 'Maior ocupação',
-          value: maiorOcupacao ? maiorOcupacao.transportadora : '-',
-          sub: maiorOcupacao ? `${fmt2.format(maiorOcupacao.ocupacao)}% da capacidade semanal` : '-'
-        }
+        { title: 'Melhor operador atual', value: melhor ? melhor.transportadora : '-', sub: melhor ? `Score ${fmt2.format(melhor.score)} | SLA ${fmt2.format(melhor.sla)}%` : '-' },
+        { title: 'Pior operador atual', value: pior ? pior.transportadora : '-', sub: pior ? `Score ${fmt2.format(pior.score)} | risco ${fmt2.format(pior.risco)}` : '-' },
+        { title: 'Maior risco operacional', value: maiorRisco ? maiorRisco.transportadora : '-', sub: maiorRisco ? `Risco ${fmt2.format(maiorRisco.risco)} | atraso ${fmt2.format(maiorRisco.atrasoPct)}%` : '-' },
+        { title: 'Maior ocupação', value: maiorOcupacao ? maiorOcupacao.transportadora : '-', sub: maiorOcupacao ? `${fmt2.format(maiorOcupacao.ocupacao)}% da capacidade semanal` : '-' }
       ];
 
       document.getElementById('radarGrid').innerHTML = boxes.map(box => `
@@ -938,56 +964,12 @@
     function renderInsights() {
       const melhor = [...agregados].sort((a, b) => b.score - a.score)[0];
       const maiorRisco = [...agregados].sort((a, b) => b.risco - a.risco)[0];
-      const sm = agregados.find(r => r.transportadora === 'SM');
-      const wm = agregados.find(r => r.transportadora === 'WM');
       const saturados = agregados.filter(r => r.ocupacao >= 90).map(r => r.transportadora);
-
       const insights = [];
 
-      if (melhor) {
-        insights.push(`
-          <div class="mini-box">
-            <div class="mini-title">Direção principal</div>
-            <div class="mini-sub"><strong>${melhor.transportadora}</strong> aparece como melhor opção no recorte atual, com score <span class="text-good">${fmt2.format(melhor.score)}</span> e SLA <span class="text-good">${fmt2.format(melhor.sla)}%</span>.</div>
-          </div>
-        `);
-      }
-
-      if (maiorRisco) {
-        insights.push(`
-          <div class="mini-box">
-            <div class="mini-title">Atenção imediata</div>
-            <div class="mini-sub"><strong>${maiorRisco.transportadora}</strong> concentra o maior risco do painel, combinando atraso e participação no volume.</div>
-          </div>
-        `);
-      }
-
-      if (sm) {
-        insights.push(`
-          <div class="mini-box">
-            <div class="mini-title">Restrição estrutural</div>
-            <div class="mini-sub"><strong>SM</strong> segue com limitação física. Mesmo com histórico relevante de volume, a régua precisa respeitar a capacidade semanal fixa.</div>
-          </div>
-        `);
-      }
-
-      if (wm) {
-        insights.push(`
-          <div class="mini-box">
-            <div class="mini-title">Parceiro em teste</div>
-            <div class="mini-sub"><strong>WM</strong> é acompanhada como parceiro em teste. O score sofre ajuste menor para evitar conclusões precoces com base curta.</div>
-          </div>
-        `);
-      }
-
-      if (saturados.length) {
-        insights.push(`
-          <div class="mini-box">
-            <div class="mini-title">Capacidade pressionada</div>
-            <div class="mini-sub">Operadores acima de 90% de ocupação no recorte: <strong>${saturados.join(', ')}</strong>.</div>
-          </div>
-        `);
-      }
+      if (melhor) insights.push(`<div class="mini-box"><div class="mini-title">Direção principal</div><div class="mini-sub"><strong>${melhor.transportadora}</strong> aparece como melhor opção no recorte atual, com score <span class="text-good">${fmt2.format(melhor.score)}</span> e SLA <span class="text-good">${fmt2.format(melhor.sla)}%</span>.</div></div>`);
+      if (maiorRisco) insights.push(`<div class="mini-box"><div class="mini-title">Atenção imediata</div><div class="mini-sub"><strong>${maiorRisco.transportadora}</strong> concentra o maior risco do painel, combinando atraso e participação no volume.</div></div>`);
+      if (saturados.length) insights.push(`<div class="mini-box"><div class="mini-title">Capacidade pressionada</div><div class="mini-sub">Operadores acima de 90% de ocupação no recorte: <strong>${saturados.join(', ')}</strong>.</div></div>`);
 
       document.getElementById('insightsBox').innerHTML = insights.join('');
     }
@@ -998,6 +980,7 @@
       renderCards();
       renderTable();
       renderRanking();
+      renderEvolutionChart();
       renderRadar();
       renderInsights();
     }
@@ -1009,7 +992,6 @@
     });
 
     document.getElementById('reloadBtn').addEventListener('click', loadData);
-
     loadData();
   </script>
 </body>
