@@ -22,16 +22,19 @@
     }
 
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
       background: linear-gradient(180deg, #0b1020 0%, #111827 100%);
     }
+
     .wrap {
       width: min(1700px, calc(100% - 24px));
       margin: 16px auto 36px;
     }
+
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -40,27 +43,32 @@
       flex-wrap: wrap;
       margin-bottom: 16px;
     }
+
     h1 {
       margin: 0 0 6px;
       font-size: 28px;
       color: #fff;
     }
+
     .subtitle {
       color: var(--muted);
       font-size: 13px;
       line-height: 1.45;
       max-width: 980px;
     }
+
     .panel, .meta-box, .card {
       background: rgba(17, 24, 39, 0.94);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
+
     .meta-box {
       min-width: 360px;
       padding: 12px 14px;
     }
+
     .meta-row {
       display: grid;
       grid-template-columns: 170px 1fr;
@@ -68,6 +76,7 @@
       font-size: 12px;
       margin-bottom: 6px;
     }
+
     .meta-row:last-child { margin-bottom: 0; }
     .meta-label { color: var(--muted); }
     .meta-value { color: #fff; font-weight: 700; }
@@ -83,13 +92,16 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
+
     .field { display: flex; flex-direction: column; gap: 6px; }
+
     .field label {
       font-size: 11px;
       text-transform: uppercase;
       color: var(--muted);
       letter-spacing: 0.35px;
     }
+
     .field select, .field button {
       height: 38px;
       border-radius: 10px;
@@ -99,6 +111,7 @@
       padding: 0 10px;
       font-size: 13px;
     }
+
     .field button { cursor: pointer; font-weight: 700; }
 
     .cards {
@@ -107,19 +120,39 @@
       gap: 12px;
       margin-bottom: 16px;
     }
+
     .card {
       padding: 14px;
       min-height: 108px;
       border-top: 3px solid transparent;
     }
+
     .top-good { border-top-color: var(--good); }
     .top-warn { border-top-color: var(--warn); }
     .top-bad { border-top-color: var(--bad); }
     .top-info { border-top-color: var(--info); }
     .top-accent { border-top-color: var(--accent); }
-    .kpi-title { font-size: 11px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-    .kpi-value { font-size: 28px; font-weight: 800; color: #fff; line-height: 1; margin-bottom: 8px; }
-    .kpi-sub { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+    .kpi-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .kpi-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .kpi-sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
 
     .main-grid {
       display: grid;
@@ -127,19 +160,32 @@
       gap: 16px;
       margin-bottom: 16px;
     }
+
     .lower-grid {
       display: grid;
       grid-template-columns: 1.35fr 1fr;
       gap: 16px;
       margin-bottom: 16px;
     }
+
     .panel-header {
       padding: 14px 16px;
       border-bottom: 1px solid var(--line);
       background: rgba(2, 6, 23, 0.35);
     }
-    .panel-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; }
-    .panel-subtitle { font-size: 12px; color: var(--muted); }
+
+    .panel-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .panel-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
     .panel-body { padding: 14px 16px 16px; }
     .table-wrap { overflow: auto; }
 
@@ -148,6 +194,7 @@
       border-collapse: collapse;
       min-width: 1380px;
     }
+
     th, td {
       padding: 10px 8px;
       font-size: 12px;
@@ -155,6 +202,7 @@
       white-space: nowrap;
       border-bottom: 1px solid rgba(148, 163, 184, 0.12);
     }
+
     th {
       position: sticky;
       top: 0;
@@ -165,6 +213,7 @@
       text-transform: uppercase;
       letter-spacing: 0.35px;
     }
+
     th:first-child, td:first-child { text-align: left; }
     tr:hover td { background: rgba(250, 204, 21, 0.05); }
 
@@ -174,6 +223,7 @@
       gap: 12px;
       margin-top: 14px;
     }
+
     .rank-card {
       background: var(--panel-2);
       border: 1px solid var(--line);
@@ -181,6 +231,7 @@
       padding: 14px;
       min-height: 138px;
     }
+
     .rank-head {
       display: flex;
       justify-content: space-between;
@@ -188,17 +239,20 @@
       gap: 8px;
       margin-bottom: 10px;
     }
+
     .rank-name {
       font-size: 16px;
       font-weight: 800;
       color: #fff;
       line-height: 1.05;
     }
+
     .rank-score {
       font-size: 16px;
       font-weight: 800;
       color: var(--accent);
     }
+
     .progress {
       height: 8px;
       background: #1e293b;
@@ -206,10 +260,12 @@
       overflow: hidden;
       margin-bottom: 10px;
     }
+
     .progress-bar { height: 100%; border-radius: 999px; }
     .progress-good { background: var(--good); }
     .progress-warn { background: var(--warn); }
     .progress-bad { background: var(--bad); }
+
     .rank-meta {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -226,27 +282,57 @@
       font-size: 11px;
       font-weight: 700;
     }
+
     .badge.good { background: rgba(34, 197, 94, 0.14); color: #86efac; }
     .badge.warn { background: rgba(245, 158, 11, 0.14); color: #fcd34d; }
     .badge.bad { background: rgba(239, 68, 68, 0.14); color: #fca5a5; }
     .badge.info { background: rgba(56, 189, 248, 0.14); color: #7dd3fc; }
+
     .text-good { color: #86efac; }
     .text-warn { color: #fcd34d; }
     .text-bad { color: #fca5a5; }
     .text-info { color: #7dd3fc; }
 
-    .mini-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
     .mini-box {
       background: var(--panel-2);
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 12px;
     }
-    .mini-title { font-size: 11px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-    .mini-value { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 6px; }
-    .mini-sub { font-size: 12px; color: var(--muted); line-height: 1.35; }
 
-    .footer-note { margin-top: 12px; font-size: 11px; color: var(--muted); line-height: 1.5; }
+    .mini-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .mini-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .mini-sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .footer-note {
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
     .error-box {
       margin-top: 12px;
       padding: 12px;
@@ -266,6 +352,7 @@
       height: 330px;
       display: block;
     }
+
     .legend {
       display: flex;
       gap: 14px;
@@ -274,11 +361,13 @@
       font-size: 12px;
       color: var(--muted);
     }
+
     .legend-item {
       display: inline-flex;
       align-items: center;
       gap: 8px;
     }
+
     .legend-color {
       width: 12px;
       height: 12px;
@@ -290,11 +379,13 @@
       .ranking-grid { grid-template-columns: repeat(3, minmax(180px, 1fr)); }
       .cards { grid-template-columns: repeat(3, minmax(180px, 1fr)); }
     }
+
     @media (max-width: 1200px) {
       .filters { grid-template-columns: repeat(3, 1fr); }
       .cards { grid-template-columns: repeat(3, 1fr); }
       .main-grid, .lower-grid { grid-template-columns: 1fr; }
     }
+
     @media (max-width: 760px) {
       .wrap { width: min(100% - 12px, 100%); }
       h1 { font-size: 22px; }
@@ -326,10 +417,7 @@
     <div class="filters">
       <div class="field">
         <label for="mesFilter">Data</label>
-        <select id="mesFilter">
-          <option value="TODOS">Todos</option>
-          <option value="ULTIMOS_7_DIAS">Últimos 7 dias</option>
-        </select>
+        <select id="mesFilter"></select>
       </div>
       <div class="field">
         <label for="operadorFilter">Transportadora</label>
@@ -579,6 +667,7 @@
     function weeksInPeriod(rows) {
       const dates = rows.map(r => r.dataObj).filter(Boolean);
       if (!dates.length) return 4;
+
       const min = new Date(Math.min(...dates));
       const max = new Date(Math.max(...dates));
       const diffDays = Math.max(1, Math.ceil((max - min) / (1000 * 60 * 60 * 24)) + 1);
@@ -614,6 +703,7 @@
 
     async function loadData() {
       hideError();
+
       try {
         const [cargasResponse, performanceResponse] = await Promise.all([
           fetch(CSV_CARGAS_URL + '?t=' + Date.now()),
@@ -637,14 +727,17 @@
           transportadora: normalizeText(row['TRANSPORTADORA'] || ''),
           m3: parseNumberBr(row['M3'] || 0),
           kg: parseNumberBr(row['KG'] || 0)
-        })).filter(r => r.transportadora).map(r => ({ ...r, dataObj: parseDateBr(r.data) }));
+        }))
+        .filter(r => r.transportadora)
+        .map(r => ({ ...r, dataObj: parseDateBr(r.data) }));
 
         performanceBase = performanceRows.map(row => ({
           transportadora: normalizeText(row['TRANSPORTADORA'] || ''),
           atrasadas: parseNumberBr(row['ATRASADOSENTREGAS'] || 0),
           emDia: parseNumberBr(row['EMDIAENTREGAS'] || 0),
           capacidadeSemanal: parseNumberBr(row['CAPACIDADECARRETASSEMANAIS'] || 0)
-        })).filter(r => r.transportadora);
+        }))
+        .filter(r => r.transportadora);
 
         if (!cargasBase.length) throw new Error('O arquivo cargas_diarias.csv veio vazio ou fora do formato esperado.');
         if (!performanceBase.length) throw new Error('O arquivo performance_operadores.csv veio vazio ou fora do formato esperado.');
@@ -665,12 +758,27 @@
     }
 
     function initFilters() {
+      const mesesDinamicos = Array.from(new Set(
+        cargasBase.map(r => r.mes).filter(Boolean)
+      )).sort();
+
+      const opcoesData = ['TODOS', 'ULTIMOS_7_DIAS', ...mesesDinamicos];
+
       const operadores = ['TODOS', ...Array.from(new Set([
         ...cargasBase.map(r => r.transportadora).filter(Boolean),
         ...performanceBase.map(r => r.transportadora).filter(Boolean)
       ])).sort()];
 
-      document.getElementById('operadorFilter').innerHTML = operadores.map(v => `<option value="${v}">${v}</option>`).join('');
+      document.getElementById('mesFilter').innerHTML = opcoesData.map(v => {
+        let label = v;
+        if (v === 'TODOS') label = 'Todos';
+        if (v === 'ULTIMOS_7_DIAS') label = 'Últimos 7 dias';
+        return `<option value="${v}">${label}</option>`;
+      }).join('');
+
+      document.getElementById('operadorFilter').innerHTML = operadores.map(v =>
+        `<option value="${v}">${v}</option>`
+      ).join('');
     }
 
     function buildFilteredCargas() {
@@ -685,7 +793,11 @@
         const startDate = new Date(maxDate);
         startDate.setDate(maxDate.getDate() - 6);
 
-        filteredCargas = filteredCargas.filter(r => r.dataObj && r.dataObj >= startDate && r.dataObj <= maxDate);
+        filteredCargas = filteredCargas.filter(r =>
+          r.dataObj && r.dataObj >= startDate && r.dataObj <= maxDate
+        );
+      } else if (filtroData !== 'TODOS') {
+        filteredCargas = filteredCargas.filter(r => r.mes === filtroData);
       }
 
       if (operador !== 'TODOS') {
@@ -776,6 +888,7 @@
 
     function buildEvolutionSeries() {
       const monthMap = new Map();
+
       cargasBase.forEach(row => {
         if (!row.transportadora || !row.dataObj) return;
         const key = `${row.dataObj.getFullYear()}-${String(row.dataObj.getMonth() + 1).padStart(2, '0')}`;
@@ -992,6 +1105,7 @@
     });
 
     document.getElementById('reloadBtn').addEventListener('click', loadData);
+
     loadData();
   </script>
 </body>
